@@ -1,0 +1,126 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Item Detail</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item ">Manage Catagory</li>
+          <li class="breadcrumb-item ">Catagory Detail</li>
+          <li class="breadcrumb-item active">Item Detail</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-8">
+
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{item.item_name}} history</h5>
+                    
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                      <thead>
+                        <tr>
+                          
+                          <th scope="col">Action</th>
+                          <th scope="col">Resone</th>
+                          <th scope="col">Amount</th>
+
+                          <th scope="col">Last_update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for ItemHistory in item_history  %}
+                        <tr>
+                           {% if ItemHistory.Action == 'Add'  %}
+                            <td>{{ItemHistory.Action}}</td>
+                            {% if ItemHistory.Reason == 'Gift' %}
+                            <td>{{ItemHistory.Reason}}  <span class="badge bg-info"> By: {{ItemHistory.gift_by}} </span> </td>
+                            {% elif ItemHistory.Reason == 'Other'  %}
+                            <td>{{ItemHistory.Other_Reseaon}}</td>
+                            {% elif ItemHistory.Reason == 'Returned Material' %}
+                            <td>{{ItemHistory.Reason}}  <span class="badge bg-success"> By: {{ItemHistory.return_by}} </span> </td>
+                            {% else %}
+                            <td>{{ItemHistory.Reason}}</td>
+                            {% endif %}
+                            <td>{{ItemHistory.Amount}}</td>
+                            <td>{{ItemHistory.last_update}}</td>
+                          {% elif ItemHistory.Action == 'Removed' %}
+                             <td>{{ItemHistory.Action}}</td>
+                             <td>{{ItemHistory.Other_Reseaon}} : <span class="badge bg-info">{{ItemHistory.taken_by}}</span></td>
+                             <td>{{ItemHistory.Amount}}</td>
+                             <td>{{ItemHistory.last_update}}</td>
+                           {% endif %}
+                        </tr>
+                        {% endfor %}
+                       
+                      </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Manage Item</h5>
+                    <!-- Vertical Form -->
+                    <form class="row g-3" method="POST">
+                      {% csrf_token %}
+                      <div class="col-12">
+                        <label for="inputNanme4" class="form-label">Item Name</label>
+                        <input type="text" class="form-control"  name="item_name" placeholder="Enter Item Name" value="{{item.item_name}}" required>
+                        </div>
+                      <div >
+                        <button type="submit" class="btn btn-warning "> Update </button>
+
+                        <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                          Delete
+                        </button>
+                      </div>
+                    </form><!-- Vertical Form -->
+                <!-- Vertically centered Modal -->
+                <div class="modal fade" id="verticalycentered" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Are You Sure to Delete {{item.item_name}} from Catagory</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <P>This action will remove all file of {{item.item_name}}.</P>
+                      <div class="modal-footer">
+                        
+                        <a href="{% url 'item-delete' item.id %}" class="btn btn-danger">Yes</a>
+                        <a href="{% url 'item_detail' item.id %}" class="btn btn-info">No</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Vertically centered Modal-->
+                  </div>
+                  </div>
+                </div>
+                
+               
+            </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,207 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Departments</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'departments' %}">Departments</a>
+        </li>
+        <li class="breadcrumb-item">Department Details</li>
+      </ol>
+    </nav>
+  </div>
+  {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+  <section class="section" style="margin-top: 50px">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Manage Department</h5>
+                <form action="{% url 'hr_dept_name_change' %}" method="POST">
+                  {% csrf_token %}
+                  <label for="inputNanme4" class="form-label"
+                    ><span>Department Name</span></label
+                  >
+                  <input
+                  type="hidden"
+                  name="departmentId"
+                  value="{{selectedDepartment.id}}"
+                />
+                 
+                   <input type="text" name="deptname" id="" class="form-control" value="{{selectedDepartment.departmentName}}">
+                  <div style="display: flex; justify-content: flex-end">
+                    <button
+                      style="margin: 10px"
+                      type="submit"
+                      class="btn btn-outline-warning"
+                    >
+                      Update
+                    </button>
+                  <!-- Vertically centered Modal -->
+              <button type="button" 
+              style="margin: 10px"
+             
+              class="btn btn-outline-danger"
+              data-bs-toggle="modal" data-bs-target="#verticalycentered">
+
+
+
+                Delete
+              </button>
+              <div class="modal fade" id="verticalycentered" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Delete Department</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                     Are You Sure to delete Department {{selectedDepartment.departmentName}} ? </div>
+                    <div class="modal-footer">
+                      <a href="{% url 'hr-department-detail' selectedDepartment.id %}" class="btn btn-info" data-bs-dismiss="modal">No</a>
+                      <a href="{% url 'hr-department-delete' selectedDepartment.id %}" class="btn btn-danger">Yes</a>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Vertically centered Modal-->
+
+                  </div>
+                </form><!-- Vertical Form -->
+            <!-- Vertically centered Modal -->
+           
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Manage Department Head</h5>
+              </h2>
+              
+                <form action="{% url 'hr_set_dept_head' %}" method="POST">
+                  {% csrf_token %}
+                  <label for="inputNanme4" class="form-label"
+                    ><span>Department Head Name</span></label
+                  >
+                 
+                  <input
+                    type="hidden"
+                    name="departmentId"
+                    value="{{selectedDepartment.id}}"
+                  />
+                  <select name="dept_head" class="form-control">
+                     <option disabled value="">Select Department Head</option>
+                     {% for dep in departmentHeads %}
+                     
+                      <option value="{{dep.Full_Name}}">{{dep.Full_Name}}</option>
+                     {% endfor %}
+                  </select>
+                  <div style="display: flex; justify-content: flex-end">
+                    <button
+                      style="margin: 10px"
+                      type="submit"
+                      class="btn btn-outline-success"
+                    >
+                      Save Change
+                    </button>
+                    
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Add Employe</h5>
+                <form action="{% url 'add_emp_to_dep' %}" method="POST">
+                  {% csrf_token %}
+                  <label for="inputNanme4" class="form-label"
+                    ><span>Select Employe</span></label
+                  >
+                 
+                  <input
+                    type="hidden"
+                    name="departmentName"
+                    value="{{selectedDepartment.departmentName}}"
+                  />
+                  <select name="employe" class="form-control">
+                     <option disabled value="">Select employe Head</option>
+                     {% for emp in all_emp %}
+                      <option value="{{emp.Full_Name}}">{{emp.Full_Name}}</option>
+                     {% endfor %}
+                  </select>
+                  <div style="display: flex; justify-content: flex-end">
+                    <button
+                      style="margin: 10px"
+                      type="submit"
+                      class="btn btn-outline-success"
+                    >
+                      Add Employe
+                    </button>
+                    
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+           
+            <h3 style="margin: 20px 0">
+              Department Head : {{selectedDepartment.departmentHead}}
+            </h3>
+            <h4>Members of {{selectedDepartment.departmentName}}</h4>
+            <table class="table table-striped datatable">
+              <thead>
+                <tr>
+                
+                  <th scope="col">Memeber Name</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">phone no.</th>
+                  <th scope="col">Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for eachMember in all_employer %}
+                <tr>
+                 
+                  <td>{{eachMember.Full_Name}}</td>
+                  <td>{{eachMember.gender}}</td>
+                  <td>{{eachMember.phone1}}</td>
+                  <td>{{eachMember.address}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    
+    </div>
+  </section>
+</main>
+
+{% endblock %}

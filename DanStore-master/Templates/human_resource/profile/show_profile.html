@@ -1,0 +1,45 @@
+{% extends 'human_resource/profile/profile-base.html' %}
+{% load static %}
+{% block profile %}
+
+<div class="tab-pane fade show active profile-overview" id="profile-overview">
+    <h5 class="card-title">About</h5>
+    <p class="small fst-italic">{{admin.about}}
+    <h5 class="card-title">Profile Details</h5>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label ">Full Name</div>
+      <div class="col-lg-9 col-md-8">{{admin.user.first_name}} {{admin.user.last_name}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Company</div>
+      <div class="col-lg-9 col-md-8">DanEnergy</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Job</div>
+      <div class="col-lg-9 col-md-8">{{admin.role}}</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Address</div>
+      <div class="col-lg-9 col-md-8">{{admin.address}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Phone 1</div>
+      <div class="col-lg-9 col-md-8">{{admin.phone1}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Phone 2</div>
+      <div class="col-lg-9 col-md-8">{{admin.phone2}}</div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 label">Email</div>
+      <div class="col-lg-9 col-md-8">{{user.email}}</div>
+    </div>
+
+  </div>
+{% endblock %}

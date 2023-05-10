@@ -1,0 +1,107 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Departments</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'departments' %}">Departments</a>
+        </li>
+        <li class="breadcrumb-item">Add New Department</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h3
+                style="
+                  color: black;
+                  display: flex;
+                  justify-content: center;
+                  margin: 30px;
+                "
+              >
+                Add New Department
+              </h3>
+              <form action="add-new-department" method="post">
+                {% csrf_token %}
+                <div class="row mb-3" style="margin: 10px">
+                  <div class="col-lg-12">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        name="departmentName"
+                        placeholder="department name"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-building"></i> Department Name</span
+                        ></label
+                      >
+                    </div>
+
+                    <div class="col-11 m-3">
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Address"
+                          id="floatingTextarea"
+                          name="departmentDescription"
+                          style="height: 100px"
+                        ></textarea>
+                        <label style="color: black" for="floatingTextarea"
+                          ><span>Detail about the Department</span></label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-lg-6">
+                    <div class="form-floating m-3">
+                      <select
+                        class="form-select"
+                        name="departmentHead"
+                        id="floatingSelect"
+                        aria-label="Floating label select example"
+                      >
+                        <option>Head of Department</option>
+                        {% for depthead in departmentHeads %}
+                        <option value="{{depthead.Full_Name}}">
+                          {{depthead.Full_Name}}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div> -->
+                </div>
+                <div class="row">
+                  <div class="col-lg-10"></div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10"></div>
+                  <div class="col-lg-2" style="margin-top: 25px">
+                    <button type="submit" class="btn btn-outline-secondary">
+                      Add Department
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

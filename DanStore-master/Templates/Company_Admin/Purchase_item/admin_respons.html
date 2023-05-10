@@ -1,0 +1,93 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1 style="color: black">List of Item for Purchase</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'admin-dashboard' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item">List of Item for Purchase</li>
+        </ol>
+      </nav>
+    </div>
+    <!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-2"></div>
+          <div class="col-lg-8">
+           
+            <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Request information</h5>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th scope="col">Describtion</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td>{{req_order.Description}}</td>
+                        <td>{{req_order.unit}}</td>
+                        <td>{{req_order.req_qty}}</td>
+                        <td>{{req_order.date}}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br>
+                  <h5><strong>Employer information:</strong></h5>
+                  <ul>
+                    
+                    <li><p><span>Employer name:</span> <span class="h5">{{req_order.form1per.Request_by}}</span></p></li>
+                    <li><p><p><span>Employer Department:</span> <span class="h5">{{req_order.form1per.Department }}</span></p></p></li>
+                    <li><p><p><span>Employer Phone:</span> <span class="h5">{{req_emp.phone1}}</span></p></p></li>
+                  </ul>
+                  <h5><strong>Request Status:</strong></h5>
+                  <ul>
+                    <li><p><span>Department Head Response:</span> <span class="h5">Allowed</span></p></li>
+                    <li><p><p><span>Store Manager Response:</span> <span class="h5">Allowed</span></p></p></li> 
+                  </ul>
+                  
+                  {% if req_order.Admin_Appruval == 'Approved' or req_order.Admin_Appruval == 'Reject' %}
+                  <h5 class="pt-2"><strong>Admin Response</strong></h5>
+                  
+                  <p>{{req_order.Admin_response}}</p>
+                 {% else %}
+                <form action=" " class="border shadow p-3" method="POST">
+                    <h5 class="text-center pt-2"><strong>Admin Response</strong></h5>
+                    {% csrf_token %}
+                   <div class="col-12 p-2">
+                    <textarea class="form-control" placeholder="Enter Your Comment ....." name="note" id="floatingTextarea" style="height: 100px;"></textarea>
+                   </div>
+                   <div class="col-12 p-2">
+                    <button type="submit" class="btn btn-outline-success" name="approve">Approve</button>
+                    <button type="submit" class="btn btn-outline-danger" name="reject">Reject</button>
+                   </div>
+                </form>
+                {% endif %}
+                </div>
+              </div>
+         </div>
+         </div>
+
+    </section>
+    </main>
+    {% endblock %}

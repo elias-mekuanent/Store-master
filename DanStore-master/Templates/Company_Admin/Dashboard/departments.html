@@ -1,0 +1,37 @@
+{% extends 'Company_Admin/Dashboard/index.html' %}
+
+{% block Dashboard %}
+
+<div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Departments</h5>
+          
+          <!-- Table with stripped rows -->
+          <table class="table table-border table-striped datatable">
+            <thead>
+              <tr>
+                
+                <th scope="col">Departments Name</th>
+                <th scope="col">Departments Head </th>
+                <th scope="col">Departments Description</th>
+              </tr>
+            </thead>
+            <tbody>              
+              {% for dep in allDep %}
+              <tr>
+                <td><a href="">{{dep.departmentName}}</a></td>
+                <td>{{dep.departmentHead}}</td>
+                <td>{{dep.departmentDescription}}</td>
+              </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

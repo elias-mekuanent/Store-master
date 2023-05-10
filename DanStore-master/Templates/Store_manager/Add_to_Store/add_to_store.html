@@ -1,0 +1,66 @@
+<{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Add to Store</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Add to Store</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-12">
+             
+                {% block add %}
+                <div class="card recent-sales overflow-auto">
+                  <div class="card-body">
+                    <h5 class="card-title">Add to Store</h5>
+                     
+                    <form action="add_to_store1" method="POST">
+                          {% csrf_token %}
+                          <div class="row"> 
+                            <div class="col-10 ">
+                              <select class="form-select" id="floatingSelect" aria-label="State" name="reson" required>
+                                <option>Purchased</option>
+                                <option>Returned Material</option>
+                                <option>Gift</option>
+                                <option>Other</option>
+                              </select>
+                              </div>
+                          <div class=" col-lg-2 text-center d-grid">
+                            <button type="submit" class="btn btn-success">Next</button>
+                          </div>
+                        </div>
+                        </form>
+                      
+                    </div>
+                  </div>
+              {% endblock %}
+            </div>
+          </div>
+          
+        
+        
+    </section>
+    
+  </main><!-- End #main -->
+{% endblock %}
+
+>

@@ -1,0 +1,139 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+    <div class="pagetitle">
+      <h1 style="color: black">Dashbord</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'admin-dashboard' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item">Dashbord</li>
+        </ol>
+      </nav>
+    </div>
+    <!-- End Page Title -->
+  
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+              <a href="{% url 'hr-manage-employee' %}">
+              <div class="card info-card sales-card newshadow">
+                <div class="card-body">
+                  <h5 class="card-title">Employees</h5>
+  
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                    <h1><span class="badge bg-primary">{{totall_NoEmp}}</span><h1></h1>
+                    </div>
+                    <div class="ps-3">
+                      <span class="text-muted small pt-2 ps-1">Employees</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            </div>
+            <!-- End Sales Card -->
+  
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+              <a href="{% url 'hr-department' %}">
+              <div class="card info-card revenue-card newshadow">
+                <div class="card-body">
+                  <h5 class="card-title">Department</h5>
+  
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                    <h1><span class="badge bg-primary">{{totall_NoDep}}</span><h1></h1>
+                </div>
+                <div class="ps-3">
+                  <span class="text-muted small pt-2 ps-1">Department</span>
+                </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            </div>
+            <!-- End Revenue Card -->
+  
+            <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4">
+              <a href="{% url 'hr-aprove-employe' %}">
+              <div class="card info-card customers-card newshadow">
+                <div class="card-body">
+                  <h5 class="card-title">UnAproved Employes</h5>
+  
+                  <div class="d-flex align-items-center">
+                    <div
+                      class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                    <h1><span class="badge bg-warning">{{allunAprove}}</span></h1>
+                </div>
+                <div class="ps-3">
+                  <span class="text-muted small pt-2 ps-1">Unaproved Employees</span>
+                </div>
+                  </div>
+                </div>
+              </div>
+               </a>
+            </div>
+            <!-- End Customers Card -->
+            <!-- Customers Card -->
+           
+            <!-- End Customers Card -->
+          </div>
+        </div>
+      </div>
+      <!-- End Reports -->
+  
+      <!-- Reports -->
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Employees</h5>
+            <table class="table table-border table-striped datatable">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">User Name</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Access Store</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for employee in allEmployees %}
+              <tr>
+                <td></td>
+                <td><a href="{% url 'employe-ditel' employee.id  %}">{{employee.Full_Name}}</a></td>
+                <td>{{employee.role}}</td>
+                <td>{{employee.user}}</td>
+                <td>{{employee.gender}}</td>
+                <td>{{employee.user.email}}</td>
+                <td>{{employee.accessStore}}</td>
+              </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- End Reports -->
+  
+      <!-- </div> -->
+      <!-- </div> -->
+      <!-- End Left side columns -->
+      <!-- </div> -->
+    </section>
+  </main>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'Department_head/D_base.html' %}
+{% block d_head  %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Add New Store</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'role' %}">Role</a>
+        </li>
+        <li class="breadcrumb-item">Role Details</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h3
+                style="
+                  color: black;
+                  display: flex;
+                  justify-content: center;
+                  margin: 30px;
+                "
+              >
+                Role Details
+              </h3>
+            </div>
+            <div class="row">
+              <div class="col-lg-5" style="margin-left: 40px">
+                <h4 style="color: black; margin: 8px 0">
+                  <i class="bi bi-building"></i> Role Title :
+                  Department head
+                </h4>
+                <span style="color: black; margin: 8px 0">
+                  <i class="bi bi-alt"></i> Role Details :
+                  Manage Department
+                </span>
+              </div>
+              <div class="col-lg-5">
+                <div>
+                  <div class="card col-lg-12" style="margin-left: 70px">
+                    <div class="card-body">
+                      <div
+                        class="card-title"
+                        style="display: flex; justify-content: center"
+                      >
+                        <h4 style="color: black">Privelages</h4>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          
+                          Check Employee Request
+                        </li>
+                        <li class="list-group-item">
+                          
+                          Approve Employee Request
+                        </li>
+                        <li class="list-group-item">
+                          
+                          Reject Employee Request
+                        </li>
+                        <li class="list-group-item">
+                           
+                          Make Request
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

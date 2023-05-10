@@ -1,0 +1,199 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+{% load static %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Manage Employees</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'manage-employee' %}">Manage Employees</a>
+        </li>
+        <li class="breadcrumb-item">Add New Employees</li>
+      </ol>
+    </nav>
+  </div>
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              
+              <h3
+                style="
+                  color: black;
+                  display: flex;
+                  justify-content: center;
+                  margin: 30px;
+                "
+              >
+                Add New Employees to the system
+              </h3>
+               {% block form_registration %}
+              <form class="row g-3 needs-validation" action="" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+                 <div class="col-6">
+                   <div class="form-floating m-3">
+                     <input
+                       type="text"
+                       class="form-control"
+                       name="firstName"
+                       id="floatingInput"
+                       placeholder="first name"
+                     />
+                     <label for="floatingInput" style="color: black"
+                       ><span
+                         ><i class="bi bi-person-circle"></i> First Name</span
+                       ></label
+                     >
+                   </div>
+                 </div>
+                 <div class="col-6">
+                   <div class="form-floating m-3">
+                     <input
+                       type="text"
+                       class="form-control"
+                       name="lastname"
+                       id="floatingInput"
+                       placeholder="Last name"
+                     />
+                     <label for="floatingInput" style="color: black"
+                       ><span
+                         ><i class="bi bi-person-circle"></i> Last Name</span
+                       ></label
+                     >
+                   </div>
+                 </div>
+                 
+                 <div class="col-6">
+                   <div class="form-floating m-3">
+                     <input
+                       type="email"
+                       class="form-control"
+                       id="floatingInput"
+                       name="email"
+                       placeholder="email"
+                     />
+                     <label for="floatingInput" style="color: black"
+                       ><span
+                         ><i class="bi bi-envelope-open"></i> Email</span
+                       ></label
+                     >
+                   </div>
+                 </div>
+                 <div class="col-6">
+                   <div class="form-floating m-3">
+                     <input
+                       type="text"
+                       class="form-control"
+                       name="address"
+                       id="floatingInput"
+                       placeholder="Address"
+                     />
+                     <label for="floatingInput" style="color: black"
+                       ><span
+                         ><i class="bi bi-pin-map-fill"></i>Address</span
+                       ></label
+                     >
+                   </div>
+                 </div>
+                 <div class="col-6">
+                   <div class="form-floating m-3">
+                     <input
+                       type="text"
+                       class="form-control"
+                       name="phone1"
+                       id="floatingInput"
+                       placeholder="Phone1"
+                     />
+                     <label for="floatingInput" style="color: black"
+                       ><span
+                         ><i class="bi bi-phone"></i>Phone1</span
+                       ></label
+                     >
+                   </div>
+                 </div>
+                 <div class="col-6">
+                   <div class="form-floating m-3">
+                     <input
+                       type="text"
+                       class="form-control"
+                       name="phone2"
+                       id="floatingInput"
+                       placeholder="Phone2"
+                     />
+                     <label for="floatingInput" style="color: black"
+                       ><span
+                         ><i class="bi bi-phone"></i>Phone2</span
+                       ></label
+                     >
+                   </div>
+                 </div>
+                 <fieldset class="row m-3">
+                   <legend
+                     class="col-form-label col-sm-3 pt-0"
+                     style="color: black"
+                   >
+                     <span>Gender</span>
+                   </legend>
+                   <div class="col-sm-9">
+                     <div class="form-check">
+                       <input
+                         class="form-check-input"
+                         type="radio"
+                         name="gender"
+                         id="gridRadios1"
+                         value="male"
+                         checked
+                       />
+                       <label class="form-check-label" for="gridRadios1">
+                         <span>Male</span>
+                       </label>
+                     </div>
+                     <div class="form-check">
+                       <input
+                         class="form-check-input"
+                         type="radio"
+                         name="gender"
+                         id="gridRadios2"
+                         value="female"
+                       />
+                       <label class="form-check-label" for="gridRadios2">
+                         <span>Female</span>
+                       </label>
+                     </div>
+                   </div>
+                 </fieldset>
+                
+                 <div class="col-12 text-end">
+                   <button class="btn btn-primary " type="submit">Next</button>
+                 </div>
+                
+               
+               </form>
+               {% endblock form_registration %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

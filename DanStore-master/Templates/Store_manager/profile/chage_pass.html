@@ -1,0 +1,51 @@
+{% extends 'Store_manager/S_base.html'  %}
+{% load crispy_forms_tags %}
+{% block store %}
+{% load static %}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Profile</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active">Profile</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="card">
+            <div class="card-body pt-3">
+              <ul class="nav nav-tabs">
+               <li class="nav-item">
+                  <a class="nav-link" href="#">Change Password</a>
+                </li>
+              </ul>
+              <div class="tab-content pt-2">
+                {% block profile %}
+
+                <div class="col-12">
+                  <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy}}
+                    <div class="pt-2">
+                      <button type="submit" class="btn btn-success">Save Changes</button>
+                    </div>
+                  </form>
+              
+                </div>
+                {% endblock profile %}
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    </main>
+{% endblock %}

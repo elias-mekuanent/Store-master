@@ -1,0 +1,94 @@
+{% extends 'employe/index.html' %} {% load static %}
+{% block table %} 
+              <div class="col-lg-12">
+                <div class="card recent-sales overflow-auto">
+                  <div class="card-body">
+                    <h5 class="card-title">Pending Items</h5>
+                    
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                      <thead>
+                        <tr>
+                          <!-- <th scope="col">#</th> -->
+                          <th scope="col">Describtion</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Department Head Approval</th>
+                          <th scope="col">Store Manager Action</th>
+                          <th scope="col">Received Status</th>
+                          <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                        {% for item in all_emp_request_pending %}
+                        
+                         <tr>
+                          <!-- <th scope="row">1</th> -->
+                          <td><a href="{% url 'view_request' item.id %}">{{item.Description}}</a></td>
+                          <td>{{item.unit}}</td>
+                          <td>{{item.req_qty}}</td>
+                    
+                          {% if item.dept_head_Action == 'Pending' %}
+                          <td><span class="badge bg-warning text-dark">{{item.dept_head_Action}}</span></td>
+                          {% elif item.dept_head_Action == 'Approved' %}
+                          <td><span class="badge bg-success">{{item.dept_head_Action}}</span></td>
+                          
+                          {% endif %} 
+
+                          {% if item.Store_Keeper_Action == "Pending" %}
+                          <td><span class="badge bg-warning text-dark">{{item.Store_Keeper_Action}}</span></td>
+                          {% elif item.Store_Keeper_Action == 'Allowed' %}
+                          <td><span class="badge bg-success">{{item.Store_Keeper_Action}}</span></td>
+                          {% elif item.Store_Keeper_Action == 'wait' %}
+                          <td><span class="badge bg-info">{{item.Store_Keeper_Action}}</span></td>
+                          
+                          {% endif %} 
+
+                          {% if item.Store_Keeper_Action == "Pending" %}
+                          <td>
+                            <a class="btn btn-sm btn-success text-dark disabled">Yes</a>
+                            <a href="{% url 'cancel_request' item.id %}" class="btn btn-sm btn-danger text-dark ">No</a>
+                          </td>
+                          {% elif item.Store_Keeper_Action == 'wait' %}
+                          <td>
+                            <a class="btn btn-sm btn-success text-dark disabled">Yes</a>
+                            <a href="{% url 'cancel_request' item.id %}" class="btn btn-sm btn-danger text-dark ">No</a>
+                          </td>
+                          {% elif item.Store_Keeper_Action == 'Allowed' %} 
+                             {% if item.Recival_status_by_Employer == 'Received' %}
+                             <td><span class="badge bg-success">Completed_Request</span></td>
+                          {% elif item.Recival_status_by_Employer == 'Not_Received' %}
+                          <td><span class="badge bg-info">Request_Cancelled</span></td>
+                          {% else  %}
+                          <td>
+                            <a href="{% url 'approved_accept' item.id %}" class="btn btn-sm btn-success text-dark ">Yes</a>
+                            <a href="{% url 'cancel_request' item.id %}" class="btn btn-sm btn-danger text-dark ">No</a>
+                          </td>
+                            {% endif %}
+                         
+                          {% elif item.Store_Keeper_Action == 'Reject' %}
+                          <td>
+                            <span class="badge bg-danger">Request_Rejected</span>
+                          </td>
+                          {% endif %}
+                          
+                          
+                          <td>{{item.date}}</td>
+                          
+                          
+                        </tr>
+                       
+                       {% endfor %}
+  
+                          
+                        
+                      
+                      </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+      
+                  </div>
+                </div>
+                </div>
+                {% endblock table %}

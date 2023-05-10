@@ -1,0 +1,76 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Vendors</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Vendors</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-11" style="display: flex; justify-content: right">
+        <div class="d-grid gap-2 m-3">
+          <a
+            href="{% url 'add-new-vendor' %}"
+            class="btn btn-outline-secondary btn-lg"
+            type="button"
+          >
+            <i class="bi bi-bag-plus-fill"></i
+            ><span style="margin: 0 6px"> </span>Add New Vendors
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Tabels -->
+    <div class="col-lg-11">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Vendors</h5>
+          <table class="table table-striped datatable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Vendor Name</th>
+                <th scope="col">Products</th>
+                <th scope="col">Origin</th>
+                <th scope="col">Type</th>
+                <th scope="col">Added Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for eachVendor in allVendors %}
+              <tr>
+                <th scope="row">{{eachVendor.vendorCode}}</th>
+                <td>{{eachVendor.vendorName}}</td>
+                <td>{{eachVendor.vendorProducts}}</td>
+                <td>{{eachVendor.vendorOrigin}}</td>
+                <td>{{eachVendor.vendorType}}</td>
+                <td>{{eachVendor.vendorAdded}}</td>
+                <td>
+                  <a
+                    href="{% url 'vendor-detail' eachVendor.pk %}"
+                    class="btn btn-outline-secondary"
+                    >Details</a
+                  >
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- End of Tabel -->
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

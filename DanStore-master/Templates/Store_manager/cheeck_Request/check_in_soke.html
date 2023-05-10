@@ -1,0 +1,57 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Cheeck-Request</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Message</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+           
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Item In Stoke</h5>
+                {% if order_item %}
+               
+                  <table class="table">
+                    <thead>
+                      <tr>
+                       
+                        <th scope="col">Name Item</th>
+                        <th scope="col">Catagory</th>
+                        <th scope="col">Total in stoke</th>
+                        <th scope="col">last update Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     {% for item in order_item %}
+                      <tr>
+                        
+                        <td>{{item.item_name}}</td>
+                        <td>{{item.Catagory}}</td>
+                        <td>{{item.total_item_in_Stok}}</td>
+                        <td>{{item.last_update}}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                
+                {% else %}
+                <h3>The item is not available in Stoke.</h3>
+                {% endif %}
+                </div>
+              </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

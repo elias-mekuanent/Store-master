@@ -1,0 +1,194 @@
+{% extends 'account/account_base.html' %}
+
+{% load static %}
+
+{% block content %}
+<main>
+  <div class="container">
+
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12 d-flex flex-column align-items-center justify-content-center">
+
+            <div class="d-flex justify-content-center py-4">
+              <a href="index.html" class="logo d-flex align-items-center w-auto">
+                <img src="assets/img/logo.png" alt="">
+                
+              </a>
+            </div><!-- End Logo -->
+
+            <div class="card mb-3">
+
+              <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                  
+                  <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                  
+                </div>
+              {% block form %}
+                <p class="text-center small"> Enter Your Personal Details</p>
+                <form class="row g-3 needs-validation" action="" method="POST" enctype="multipart/form-data" >
+                 {% csrf_token %}
+                  <div class="col-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="firstName"
+                        id="floatingInput"
+                        placeholder="first name"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-person-circle"></i> First Name</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="lastname"
+                        id="floatingInput"
+                        placeholder="Last name"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-person-circle"></i> Last Name</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  
+                  <div class="col-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="floatingInput"
+                        name="email"
+                        placeholder="email"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-envelope-open"></i> Email</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        id="floatingInput"
+                        placeholder="Address"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-pin-map-fill"></i>Address</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="phone1"
+                        id="floatingInput"
+                        placeholder="Phone1"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-phone"></i>Phone1</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="phone2"
+                        id="floatingInput"
+                        placeholder="Phone2"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-phone"></i>Phone2</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  <fieldset class="row m-3">
+                    <legend
+                      class="col-form-label col-sm-3 pt-0"
+                      style="color: black"
+                    >
+                      <span>Gender</span>
+                    </legend>
+                    <div class="col-sm-9">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="gridRadios1"
+                          value="male"
+                          checked
+                        />
+                        <label class="form-check-label" for="gridRadios1">
+                          <span>Male</span>
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="gridRadios2"
+                          value="female"
+                        />
+                        <label class="form-check-label" for="gridRadios2">
+                          <span>Female</span>
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="row m-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Profile Picture</label>
+                    <div class="col-sm-10">
+                      <input type="file" class="form-control" name="img">
+                    </div>
+                  </div>
+                  <div class="col-12 text-end">
+                    <button class="btn btn-primary " type="submit">Next</button>
+                  </div>
+                  <div class="col-12">
+                    <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                  </div>
+                
+                </form>
+              {% endblock %}
+              </div>
+            </div>
+
+           
+          </div>
+        </div>
+      </div>
+     
+    </section>
+    
+  </div>
+</main><!-- End #main -->
+
+{% endblock %}

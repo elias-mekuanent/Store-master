@@ -1,0 +1,62 @@
+{% extends 'employe/index.html' %}
+
+{% block employer %}
+
+<div class="card recent-sales overflow-auto" id="check_out12">
+    <div class="card-body">
+       
+        <div class="row pt-2">
+            <div class="col-lg-12 text-center">
+                <h5><strong>Check out Form</strong></h5>
+                
+            </div>
+            <div class="col-lg-6">
+                <p><strong>Request by: {{form1.Request_by}}</strong></p>
+                <p><strong> Department: {{form1.Department}}</strong></p>
+                <p><strong>Checked By: {{form1.checkd_by}}</strong></p>
+                <p><strong>Approved By: {{form1.Approved_by}}</strong></p>
+                <p><strong> Date: </strong></p>
+            </div>
+            
+        </div>
+    <div class="row pt-3">
+        <div class="col-lg-12">
+            <table class="table table-bordered" id="check_out1">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">#</th> -->
+                    <th scope="col">Description</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col">Remark</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in all_item %}
+                  <tr>
+                    <!-- <th scope="row">1</th> -->
+                    <td>{{item.Description}}</td>
+                    <td>{{item.unit}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{{item.Remark}}</td>
+                  </tr>
+                  {% endfor %}
+              
+                </tbody>
+              </table></div>
+    </div>
+
+   
+     </div>
+     
+  </div>
+  <div class="row">
+    <div class="col-lg-12  text-end">
+      <div class="btn-group " role="group" aria-label="Basic example">
+        <a href="#" class="btn btn-primary">Edit Request Form</a>
+        <a href="#" class="btn btn-success">Complete request</a>
+       
+      </div>
+    </div>
+  </div>
+{% endblock %}

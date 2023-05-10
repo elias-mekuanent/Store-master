@@ -1,0 +1,90 @@
+{% extends 'employe/index.html' %}
+
+{% block employer %}
+
+<div class="row">
+   <div class="col-2"></div>
+    <div class="col-8 ">
+      <div class="card">
+        <div class="card-body">
+            <h1 class="card-title text-center">Request detail</h1>
+            
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th scope="col">Describtion</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td>{{item.Description}}</td>
+                        <td>{{item.unit}}</td>
+                        <td>{{item.req_qty}}</td>
+                        <td>{{item.date}}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br>
+                  <br>
+                  <h5><strong>Request Status:</strong></h5>
+                  <ul>
+                    <li><p><span>Department Head Response:</span> <span class="h5">{{item.dept_head_Action}}</span></p></li>
+                    <li><p><p><span>Store Manager Response:</span> <span class="h5">{{item.Store_Keeper_Action}}</span></p></p></li>
+                    {% if item.Recival_status_by_Employer == "Received" %}
+                  
+                    <li><p><span>Received Status:</span> <span class="h5"> I Received</span> </p></li>
+                    
+                    {% else %}
+                    <li><p><span>Received Status:</span> <span class="h5"> Not Received yet</span> </p></li>
+                    {% endif %}
+                    {% if item.note %}
+                    <li> <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             Messages
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {{item.note|safe}}
+                               </div>
+                          </div>
+                        </div>
+                      </div><!-- End Default Accordion Example -->
+                     </li>
+                     {% endif %}
+                     
+                  </ul>
+                  
+                  <h5><strong>Item Specifications:</strong></h5>
+                  <ul>
+                    {% if item.Type_of_item %}
+                    <li><p><span>Item Type:</span> <span class="badge h5 bg-info">{{item.Type_of_item}}</span></p></li>
+                    {% endif %}
+                    {% if item.Serial_No %}
+                    <li><p><p><span>Item  Serial No:</span> <span class="badge h5 bg-info">{{item.Serial_No}}</span></p></p></li>
+                    {% endif %}
+                    {% if item.Unique_Name_No %}
+                    <li><p><p><span>Item Unique_Name_No:</span> <span class="badge h5 bg-info">{{item.Unique_Name_No}}</span></p></p></li>
+                    {% endif %}
+                  </ul>
+                  <!-- End Table with stripped rows -->
+                 
+              
+        </div>
+      </div>
+      <div class="text-end pb-3">
+        <a href="{% url 'emp_dilverd_item' item.id %}" type="button" class="btn btn-secondary"><i class="bi bi-printer"></i>Print</a>
+      </div>
+    </div>
+
+   
+</div>
+
+{% endblock %}

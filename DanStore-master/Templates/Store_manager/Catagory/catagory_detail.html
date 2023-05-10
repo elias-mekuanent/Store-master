@@ -1,0 +1,136 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Catagory detail</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item ">Manage Shelf</li>
+          <li class="breadcrumb-item active">Catagory Detail</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{catagory.Catagory_Name}}</h5>
+                    
+                    <!-- Table with stripped rows -->
+                    <table class="table table-striped">
+                      <thead>
+                        
+                        <tr>
+                          <th scope="col">Item Name</th>
+                          <th scope="col">Total in stok</th>
+                          <th scope="col">Last update</th>
+                        </tr>
+                        
+                      </thead>
+                      <tbody>
+                        {% for item in catagory.item_set.all %}
+                        <tr>
+                         
+                          
+                          
+                          <td>{{item.item_name}}</td>
+                          <td>{{item.total_item_in_Stok}}</td>
+                          <td><a href="{% url 'item_detail' item.id %}">{{item.last_update}}</a></td>
+                          
+                        </tr>
+                        {% endfor %}
+                      
+                        
+                      
+                         
+                    
+                      </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Manage Shelf</h5>
+                    <!-- Vertical Form -->
+                    <form class="row g-3" method="POST">
+                      {% csrf_token %}
+                      <div class="col-12">
+                        <label for="inputNanme4" class="form-label">Shelf Name</label>
+                        <input type="text" class="form-control"  name="catagory" placeholder="Enter Catagory" value="{{catagory.Catagory_Name}}" required>
+                        </div>
+                      <div >
+                        <button type="submit" class="btn btn-warning "> Update </button>
+
+                        <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                          Delete
+                        </button>
+                      </div>
+                    </form><!-- Vertical Form -->
+                <!-- Vertically centered Modal -->
+                <div class="modal fade" id="verticalycentered" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Are You Sure to Delete Catagory {{catagory.Catagory_Name}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <P>This action will delete all items in the category.</P>
+                      <div class="modal-footer">
+                        
+                        <a href="{% url 'catagory-delete' catagory.id %}" class="btn btn-danger">Yes</a>
+                        <a href="{% url 'catagory-detail' catagory.id %}" class="btn btn-info">No</a>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Vertically centered Modal-->
+                  </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Add New Item</h5>
+                    <!-- Vertical Form -->
+                    <form action="{% url 'add-item' catagory.id %}" method="POST">
+                      {% csrf_token %}
+                      <div class="col-12">
+                        <label for="inputNanme4" class="form-label">Item Name</label>
+                        <input type="text" class="form-control"  name="itemname" placeholder="Enter Item Name" required>
+                        </div>
+                        <div class="col-12 pt-2">
+                          <label for="inputNanme4" class="form-label">Total in Stok</label>
+                          <input type="text" class="form-control"  name="total" placeholder="Enter Total No. " required>
+                        </div>
+                     
+                      <div class="text-center d-grid pt-2" >
+                        <button type="submit" class="btn btn-success">Add</button>
+                      </div>
+                    </form><!-- Vertical Form -->
+      
+                  </div>
+                </div>
+               
+            </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

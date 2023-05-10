@@ -1,0 +1,46 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Vendors</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'vendors' %}">Vendors</a>
+        </li>
+        <li class="breadcrumb-item">Vendor Details</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-10" style="display: flex; justify-content: center">
+        <div class="card mt-4" style="min-width: 800px">
+          <div class="card-body">
+            <h1
+              style="
+                color: black;
+                display: flex;
+                justify-content: center;
+                margin: 20px;
+              "
+            >
+              {{selectedVendor.vendorName}}
+            </h1>
+            <h5 style="color: black">
+              Products From Vendor: {{selectedVendor.vendorProducts}}
+            </h5>
+            <span style="margin: 20px 0"
+              >Originated From: {{selectedVendor.vendorOrigin}}</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

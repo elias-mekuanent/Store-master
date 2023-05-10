@@ -1,0 +1,74 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Departments</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Departments</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <section class="section">
+   
+    <div class="row pb-3">
+      
+      <div class="col-lg-12 text-end ">
+       <a href="{% url 'hr_add-new-department' %}" class="btn btn-outline-secondary btn-lg"><i class="bi bi-file-earmark-plus"></i>
+           Add New Departments</a>
+      </div>
+    </div>
+    <div class="row">
+      <!--  -->
+  
+      {% for depts,num in data %}
+      <div class="col-xxl-3 col-md-6 col-sm-6">
+        <a href="{% url 'hr-department-detail' depts.id %}">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 style="color: black" class="card-title">
+                {{depts.departmentName}}
+              </h5>
+
+              <div class="d-flex align-items-center">
+                <div>
+               <h1><span class="badge bg-primary">{{num}}</span><h1></h1>
+                </div>
+                <div class="ps-3">
+                  <h6 style="color: black">Manager: {{ depts.departmentHead }}</h6>
+                  <span class="text-muted small pt-2 ps-1"
+                    >{{depts.departmentDescription}}</span
+                  >
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      {% endfor %}
+      <!--  -->
+
+      <!--  -->
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

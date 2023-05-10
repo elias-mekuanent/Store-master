@@ -1,0 +1,83 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Manage Employees</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Manage Employees</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <section class="section">
+    
+    <!-- Tabels -->
+    <div class="col-lg-11 pt-5">
+      
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Unapproved Employees</h5>
+          <table class="table table-border table-striped datatable">
+            <thead>
+              <tr>
+               
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Field of Study</th>
+                <th scope="col">Collage</th>
+                <th scope="col">Role @DanEnergy</th>
+                
+                <th scope="col">Accept</th>
+                <th scope="col">Reject</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              
+              {% for emp in allUnAprove %}
+              
+              <tr>
+                <td><a href="{% url 'un-employe-ditel' emp.id %}">{{emp.First_Name}} {{emp.Last_Name}}</a></td>
+                <td>{{emp.Emila}}</td>
+                <td>{{emp.Filed_Study}}</td>
+                <td>{{emp.Collage}}</td>
+                <td>{{emp.role}}</td>
+                
+                    <td>
+                    <a href="{% url 'approve-unaproved-emp' emp.id %}">
+                        <i class="bi bi-check-circle" style="color: green"></i>
+                    </a>
+                </td>
+                <td>
+                  <a href="{% url 'reject-request-unemp' emp.id %}">
+                      <i class="bi bi-x-circle" style="color: red"></i>
+                  </a></td>
+              </tr>
+            
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- End of Tabel -->
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

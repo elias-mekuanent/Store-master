@@ -1,0 +1,115 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Cheeck-Request</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Cheeck-Request</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-2"></div>
+          <div class="col-lg-8">
+           
+            <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Item Delivery form</h5>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th scope="col">Describtion</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td>{{item.Description}}</td>
+                        <td>{{item.unit}}</td>
+                        <td>{{item.req_qty}}</td>
+                        <td>{{item.date}}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br>
+                  <h5><strong>Employer information:</strong></h5>
+                  <ul>
+                    <li><p><span>Employer name:</span> <span class="h5">{{item.Request_by}}</span></p></li>
+                    <li><p><p><span>Employer Department:</span> <span class="h5">{{req_em.inDepartment }}</span></p></p></li>
+                    <li><p><p><span>Employer Phone:</span> <span class="h5">{{req_em.phone1}}</span></p></p></li>
+                  </ul>
+                  <h5><strong>Request Status:</strong></h5>
+                  <ul>
+                    <li><p><span>Department Head Response:</span> <span class="h5">{{item.dept_head_Action}} </span></p></li>
+                    <li><p><p><span>Store Manager Response:</span> <span class="h5">{{item.Store_Keeper_Action}}</span></p></p></li>
+                    {% if item.Recival_status_by_Employer == "Received" %}
+                  
+                    <li><p><span>Received Status:</span> <span class="h5"> I Received</span> </p></li>
+                    
+                    {% else %}
+                    <li><p><span>Received Status:</span> <span class="h5"> Not Received yet</span> </p></li>
+                    {% endif %}
+                    {% if item.note %}
+                    <li> <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             Messages
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {{item.note|safe}}
+                               </div>
+                          </div>
+                        </div>
+                      </div><!-- End Default Accordion Example -->
+                     </li>
+                     {% endif %}
+                     
+                  </ul>
+                  <h5 class="text-center pt-2"><strong>Item Specifications</strong></h5>
+                  <form action="{% url 'set_item_specifications' item.id %}" class="border shadow p-3" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="itme_id" value="{{item.id}}">
+                    <div class="col-12 p-2">
+                        <label for="seralNo">Type of item</label>
+                        <select name="type" id="" class="form-control">
+                        <option value="Fixed Assets">Fixed Assets</option>
+                        <option value="Current Assets">Current Assets</option>
+                        </select>
+                       
+                       </div> 
+                  
+                   <div class="col-12 p-2">
+                    <label for="floatingTextarea">Serial Numbers of items</label>
+                    <textarea class="form-control" name="seralNo" id="floatingTextarea" style="height: 100px;"></textarea>
+                  </div>
+                  <div class="col-12 p-2">
+                    <label for="floatingTextarea">Unique Name or Number of items.</label>
+                    <textarea class="form-control" name="uniqueNo" id="floatingTextarea" style="height: 100px;"></textarea>
+                  </div>
+                   <div class="col-12 p-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                   </div>
+                </form>
+                 
+                </div>
+              </div>
+
+         </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

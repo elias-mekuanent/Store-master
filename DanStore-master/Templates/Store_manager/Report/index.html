@@ -1,0 +1,51 @@
+{% extends 'Store_manager/S_base.html' %} {% block store %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Report</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'store-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Report</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  {% for mssg in messages%} {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">{{mssg}}</div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">{{mssg}}</div>
+  {% endif %} {% endfor %}
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Select Report Type</h5>
+            <div class="row">
+              <div class="col-10">
+                <select id="inputState" class="form-select">
+                  <option selected>Choose...</option>
+                  <option>Report type 1</option>
+                  <option>Report type 2</option>
+                  <option>Report type 3</option>
+                  <option>Report type 4</option>
+                  <option>Report type 5</option>
+                  <option>Report type 6</option>
+                </select>
+              </div>
+              <div class="col-lg-2 text-center d-grid">
+                <button type="submit" class="btn btn-success">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Default Card -->
+      </div>
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends 'Company_Admin/EditProfile/profile-base.html' %} {% block profile %} {% load
+static %}
+
+<div class="pt-3">
+  <!-- Profile Edit Form -->
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row mb-3">
+      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"
+        >Profile Image</label
+      >
+      <div class="col-md-8 col-lg-9">
+        {% if admin.profile_pic %}
+        <img src="{{admin.profile_pic.url}}" alt="Profile" width="150px" />
+        {% endif %}
+        <div class="pt-2">
+          <a
+            href="{% url 'chage-profile-pic' %}"
+            class="btn btn-primary btn-sm"
+            title="Upload profile image"
+            ><i class="bi bi-upload"></i
+          ></a>
+          <!-- <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image" type="file" data-bs-target="#verticalycentered"><i class="bi bi-trash"></i></a>
+             -->
+          {% if admin.profile_pic %}
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#verticalycentered"
+          >
+            <i class="bi bi-trash"></i>
+          </button>
+          {% endif %}
+          <!-- Vertically centered Modal -->
+          <div class="modal fade" id="verticalycentered" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">
+                    Are You Sure to Delete Your Profile Picture
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  {% if admin.profile_pic %}
+                  <img
+                    src="{{admin.profile_pic.url}}"
+                    alt="Profile"
+                    width="150px"
+                  />
+                  {% endif %}
+                </div>
+                <div class="modal-footer">
+                  <a href="{% url 'delete-pic' %}" class="btn btn-danger"
+                    >Yes</a
+                  >
+                  <a href="{% url 'edit-Profile' %}" class="btn btn-info">No</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Vertically centered Modal-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="fullName" class="col-md-4 col-lg-3 col-form-label"
+        >First_Name</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="first_name"
+          type="text"
+          class="form-control"
+          id="fullName"
+          value="{{admin.user.first_name}}"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="fullName" class="col-md-4 col-lg-3 col-form-label"
+        >Last_Name</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="last_name"
+          type="text"
+          class="form-control"
+          id="fullName"
+          value="{{admin.user.last_name}}"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="fullName" class="col-md-4 col-lg-3 col-form-label"
+        >Email</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="email"
+          type="email"
+          class="form-control"
+          id="fullName"
+          value="{{user.email}}"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="fullName" class="col-md-4 col-lg-3 col-form-label"
+        >Username</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="username"
+          type="text"
+          class="form-control"
+          id="fullName"
+          value="{{admin.user.username}}"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+      <div class="col-md-8 col-lg-9">
+        <textarea
+          name="about"
+          class="form-control"
+          id="about"
+          style="height: 100px"
+        >
+{{admin.about}}
+          </textarea
+        >
+      </div>
+    </div>
+
+    <!-- <div class="row mb-3">
+        <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+        <div class="col-md-8 col-lg-9">
+          <input name="company" type="text" class="form-control" id="company" value="{{admin.Company}}">
+        </div>
+      </div> -->
+
+    <!-- <div class="row mb-3">
+        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+        <div class="col-md-8 col-lg-9">
+          <input name="job" type="text" class="form-control" id="Job" value="{{admin.Job}}">
+        </div>
+      </div> -->
+
+    <div class="row mb-3">
+      <label for="Address" class="col-md-4 col-lg-3 col-form-label"
+        >Address</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="address"
+          type="text"
+          class="form-control"
+          id="Address"
+          value="{{admin.address}}"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="Phone" class="col-md-4 col-lg-3 col-form-label"
+        >Phone 1</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="phone"
+          type="text"
+          class="form-control"
+          id="Phone"
+          value="{{admin.phone1}}"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Phone" class="col-md-4 col-lg-3 col-form-label"
+        >Phone 2</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="phone"
+          type="text"
+          class="form-control"
+          id="Phone"
+          value="{{admin.phone2}}"
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label"
+        >Telegram Profile</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="telegram"
+          type="text"
+          class="form-control"
+          id="Twitter"
+          value="{{admin.telegram}}"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label"
+        >Facebook Profile</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="facebook"
+          type="text"
+          class="form-control"
+          id="Facebook"
+          value="{{admin.facebook}}"
+        />
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label"
+        >Instagram Profile</label
+      >
+      <div class="col-md-8 col-lg-9">
+        <input
+          name="instagram"
+          type="text"
+          class="form-control"
+          id="Instagram"
+          value="{{admin.instagram}}"
+        />
+      </div>
+    </div>
+
+    <div class="text-center d-grid">
+      <button type="submit" name="save" class="btn btn-success">
+        Save Changes
+      </button>
+    </div>
+  </form>
+  <!-- End Profile Edit Form -->
+</div>
+
+{% endblock profile %}

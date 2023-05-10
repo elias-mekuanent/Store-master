@@ -1,0 +1,100 @@
+{% extends 'Department_head/D_base.html' %} {% block d_head %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'dept-dashboard' %} " class="breadcrumb-item active"
+            >Home</a
+          >
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section" style="margin-top: 50px">
+    <div class="row">
+      <!-- <div class="col-12">
+          <div class="text-end pb-2">
+            <a href="{% url 'add_employe' %}" class="btn btn-outline-secondary">Add Employe</a>
+          </div>
+        </div> -->
+      <div class="col-lg-4">
+        <div class="card shadow">
+          <div class="card-body" style="margin: 20px">
+            <h4>Department Name</h4>
+            <h2><span class="badge bg-primary">{{dept_name}}</span><h2>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card shadow">
+          <div class="card-body" style="margin: 20px">
+            <h4>Members</h4>
+            
+            <h2><span class="badge bg-primary">{{all_emp.count}}</span><h2></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card shadow">
+          <div class="card-body" style="margin: 20px">
+            <h4>Pending Request</h4>
+            <h2><span class="badge bg-warning">{{No_pending_req}}</span><h2></h2>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h1
+              style="
+                color: black;
+                display: flex;
+                justify-content: center;
+                margin: 20px;
+              "
+            >
+              {{selectedDepartment.departmentName}}
+            </h1>
+            <span style="color: rgb(41, 213, 41)"
+              >{{selectedDepartment.departmentName}}</span
+            >
+            {{selectedDepartment.departmentDescription}}
+
+            
+            <table class="table table-striped datatable">
+              <thead>
+                <tr>
+                 
+                  <th scope="col">Memeber Name</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">phone no.</th>
+                  <th scope="col">Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for eachMember in all_emp %}
+                <tr>
+                 
+                  <td>{{eachMember.Full_Name}}</td>
+                  <td>{{eachMember.gender}}</td>
+                  <td>{{eachMember.phone1}}</td>
+                  <td>{{eachMember.address}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

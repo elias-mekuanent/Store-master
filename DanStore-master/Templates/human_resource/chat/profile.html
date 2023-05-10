@@ -1,0 +1,57 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Chat With</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item ">Chat </li>
+          <li class="breadcrumb-item active">Chat with</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-5">
+              <div class="card">
+                <div class="card-body">
+                <div class="card-title">
+                  {% if chat_employ.profile_pic %}
+                  <img src="{{chat_employ.profile_pic.url}}" class="card-img-top w-25"  alt="Profile" >    
+                  
+                                            
+                  {% endif %}
+                </div>
+              
+                
+                  <h5 >Full name: <span>{{chat_employ.user.first_name}} {{chat_employ.user.last_name}}</span>
+                  </h5>
+                  <h5 >Username: <span>{{chat_employ.user}}</span>
+                  </h5>
+                  <h5 >Department : <span>{{chat_employ.inDepartment}}</span>
+                  </h5>
+                  <h5 >Role : <span>{{chat_employ.role}}</span>
+                  </h5>
+                  <h5 >Phone : <span>{{chat_employ.phone1}}</span>
+                  </h5>
+                  <h5 >email : <span>{{chat_employ.user.email}}</span>
+                  </h5>
+              </div><!-- End Card with an image on top -->
+    
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

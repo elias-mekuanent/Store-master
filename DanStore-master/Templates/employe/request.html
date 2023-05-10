@@ -1,0 +1,104 @@
+{% extends 'employe/index.html' %}
+
+{% block employer %}
+
+<div class="row">
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Request Form </h5>
+    
+              <!-- Floating Labels Form -->
+              <form class="row g-2" action="{% url 'emp_request2' %}" method="POST">
+                {% csrf_token %}
+                <div class="col-md-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name" name="desc" required>
+                    <label for="floatingName">Description</label>
+                  </div>
+                </div>
+                 <div class="col-md-6">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="floatingSelect" aria-label="State" name="unit" required>
+                      
+                      <option>Kg.</option>
+                      <option>Meter</option>
+                      <option>Liter</option>
+                      <option>Number</option>
+                      <option>Other</option>
+                    </select>
+                    <label for="floatingSelect">unit</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="col-md-12">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" id="floatingCity" placeholder="City" name="qty" required>
+                      <label for="floatingCity">Qty</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" name="remark" style="height: 100px;" required></textarea>
+                    <label for="floatingTextarea">Remark</label>
+                  </div>
+                </div>
+               
+               
+                <div class="text-start">
+                  <button type="submit" class="btn btn-outline-secondary" name="item">Submit</button>
+                  
+                </div>
+              </form><!-- End floating Labels Form -->
+    
+            </div>
+          </div>
+    </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">checkout</h5>
+              <div class="row pt-3">
+                <div class="col-lg-12">
+                    <table class="table table-bordered table-striped" id="check_out1">
+                        <thead>
+                          <tr>
+                            <!-- <th scope="col">#</th> -->
+                            <th scope="col">Description</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Remark</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                         {% for req in emp_req %}
+                          <tr>
+                           
+                            <td>{{req.Description}}</td>
+                            <td>{{req.unit}}</td>
+                            <td>{{req.req_qty}}</td>
+                            <td>{{req.Remark}}</td>
+                          </tr>
+                        {% endfor %}
+                    
+                      
+                        </tbody>
+                      </table>
+                      <a href="{% url 'complet_request' %}" class="btn btn-outline-success">Complete request</a>
+                      <a href="{% url 'reste_request_form' %}" class="btn btn-outline-danger">Reset</a>
+           
+                      
+                    </div>
+                     
+            </div>
+        </div>
+        </div>
+    
+    </div>
+</div>
+
+{% endblock %}

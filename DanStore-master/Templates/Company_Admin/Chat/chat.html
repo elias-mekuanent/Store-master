@@ -1,0 +1,127 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Chat With</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"> <a href="{% url 'admin-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item ">Chat </li>
+          <li class="breadcrumb-item active">Chat with</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-5 nav-item dropdown pe-3">
+                                
+                              <a href="{% url 'admin-chat_profile' chat_employ.id %}">
+                                  {% if chat_employ.profile_pic %}
+                                  <img src="{{chat_employ.profile_pic.url}}" alt="Profile" class="rounded-circle w-25">
+                                 <div class="pt-3">
+                                    <span class="d-none d-md-block ps-2">{{chat_employ.user.first_name}} {{chat_employ.user.last_name}}</span>
+                                 </div>
+                                  {% endif %}
+                                  
+                                 </a>
+                                   
+                                    
+                              </div>
+                              
+                        </div>
+                        
+                    </div>
+                    <div class="card-body pt-2">
+                      {% if message %}
+                      {% for mess in message %}
+                      <div class="text-start">
+                        
+                       {% if mess.me_with == me %}
+                       <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                          <span class="badge bg-warning text-dark">{{mess.message}}</span><br>
+                        </button>
+                        {% elif mess.me_with != me %}
+                        <div class="text-end">
+                          <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                            <span class="badge bg-info text-dark text-end">{{mess.message}}</span><br>
+                          </button>
+                        </div>
+                        
+                          {% endif %}
+                          
+                         
+                        
+                       
+
+                      </div>
+                      {% endfor %}
+                       {% endif %}
+                     
+
+                    </div>
+                        
+                    <div class="card-footer">
+                      <form method="POST" >
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="col-lg-10">
+                           <input type="hidden" name="user_id">
+                          </div>
+                          <div class="col-lg-10">
+                              <input type="text" class="form-control" id="inputText" name="mess" placeholder="Text">
+                            </div>
+                        
+                            <div class="col-lg-2 text-center d-grid">
+                              <button type="submit" class="btn btn-primary">Send</button>
+                      
+                            </div>
+                     </div>
+                      </form>
+                       
+                     
+                    </div>
+                     <!-- Vertically centered Modal -->
+                <div class="modal fade" id="verticalycentered" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Chat</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="col-12 pb-2">
+                          <input type="text" class="form-control" id="inputText" value="hi">
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#" class="btn btn-info">Update</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  </div><!-- End Card with header and footer -->
+        
+            </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

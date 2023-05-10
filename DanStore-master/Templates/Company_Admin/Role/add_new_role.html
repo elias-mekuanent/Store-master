@@ -1,0 +1,117 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Add New Store</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'role' %}">Role</a>
+        </li>
+        <li class="breadcrumb-item">Add New Role</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h3
+                style="
+                  color: black;
+                  display: flex;
+                  justify-content: center;
+                  margin: 30px;
+                "
+              >
+                Add New Role
+              </h3>
+              <form>
+                <div class="row mb-3" style="margin: 10px">
+                  <div class="col-lg-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder="name@example.com"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-building"></i> Role Title</span
+                        ></label
+                      >
+                    </div>
+
+                    <div class="col-11 m-3">
+                      <div class="form-floating">
+                        <textarea
+                          class="form-control"
+                          placeholder="Address"
+                          id="floatingTextarea"
+                          style="height: 100px"
+                        ></textarea>
+                        <label style="color: black" for="floatingTextarea"
+                          ><span> Store Description</span></label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-floating m-3">
+                      <select
+                        class="form-select"
+                        id="floatingSelect"
+                        aria-label="Floating label select example"
+                      >
+                        <option>Assigned Store Keeper</option>
+                        <option value="1">Head 1</option>
+                        <option value="2">Head 2</option>
+                        <option value="3">Head 3</option>
+                        <option value="4">Head 4</option>
+                        <option value="5">Head 5</option>
+                      </select>
+                    </div>
+                    <div class="form-floating m-3">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="floatingInput"
+                        placeholder=""
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-person-circle"></i> Number of
+                          Memebers</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10"></div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10"></div>
+                  <div class="col-lg-2" style="margin-top: 25px">
+                    <button type="submit" class="btn btn-outline-secondary">
+                      Add Department
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

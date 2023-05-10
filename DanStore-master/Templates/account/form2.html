@@ -1,0 +1,60 @@
+{% extends 'account/form1.html' %}
+{% load static %}
+{% block form %}
+<p class="text-center small"> Enter Your Educational Details</p>
+<form class="row g-3 needs-validation" method="POST" action="" enctype="multipart/form-data">
+ 
+  {% csrf_token %}
+            
+    <div class="row m-3">
+        <label class="col-lg-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" name="title">
+            <option selected>Select Title</option>
+            <option value="BS">BS</option>
+            <option value="BSc">BSc</option>
+            <option value="BA">BA</option>
+            <option value="MSc">MSc</option>
+            <option value="Dr">Dr</option>
+          </select>
+        </div>
+      </div>
+      <div class="row m-3">
+        <label for="inputText" class="col-sm-2 col-form-label">Filed of Study</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Enter Your Filed of Study" name="filed_st">
+        </div>
+      </div>
+      <div class="row m-3">
+        <label for="inputText" class="col-sm-2 col-form-label">Collage</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Enter Name of Collage or University" name="collage">
+        </div>
+      </div>
+      <div class="row m-3">
+        <label for="inputText" class="col-sm-2 col-form-label">Grade</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" name="grade">
+        </div>
+      </div>
+      <div class="row m-3">
+        <label for="inputText" class="col-sm-2 col-form-label">Graguation Year</label>
+        <div class="col-sm-10">
+            <input type="date" class="form-control" name="year">
+        </div>
+      </div>
+      <div class="row m-3">
+        <label for="inputText" class="col-sm-2 col-form-label">File Upload</label>
+        <div class="col-sm-10">
+          <input type="file" class="form-control" name="file">
+        </div>
+      </div>
+    
+
+    <div class="col-12 text-end">
+        <button class="btn btn-primary " type="submit">Next</button>
+    </div>
+   
+  
+  </form>
+{% endblock %}

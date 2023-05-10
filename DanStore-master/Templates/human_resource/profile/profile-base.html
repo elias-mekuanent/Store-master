@@ -1,0 +1,92 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+
+{% load static %}
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Profile</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active">Profile</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              {% if admin.profile_pic %}
+              <img src="{{admin.profile_pic.url}}" alt="Profile" >
+              {% endif %}
+              <h2>{{user.first_name}} {{user.last_name}}</h2>
+              <h3>{{admin.role}} @DanEnergy</h3>
+              <div class="social-links mt-2">
+                {% if admin.telegram and admin.telegram != 'None' %}
+                <a href="{{admin.telegram}}" class="telegram"><i class="bi bi-telegram"></i></a>
+                {% endif %}
+
+                {% if admin.facebook and admin.facebook != 'None' %}
+                <a href="{{admin.facebook}}" class="facebook"><i class="bi bi-facebook"></i></a>
+                {% endif %}
+
+                {% if admin.instagram and admin.instagram != 'None' %}
+                <a href="{{admin.instagram}}" class="instagram"><i class="bi bi-instagram"></i></a>
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+        
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link " aria-current="page" href="{% url 'hr_user-Profile' %}">Overview</a>
+                </li>
+                <li class="nav-item">
+                 
+                  <a class="nav-link" href="{% url 'hr_edit-Profile' %}">Edit Profile</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="#">Change Password</a>
+                </li> -->
+               
+              </ul>
+              <div class="tab-content pt-2">
+                {% block profile %}
+
+                
+                {% endblock profile %}
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    </main>
+{% endblock %}

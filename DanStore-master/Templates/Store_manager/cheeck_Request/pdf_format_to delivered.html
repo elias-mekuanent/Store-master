@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    
+ 
+
+  <tr>
+    <td 
+    style="font-family:Verdana, Geneva, sans-serif;  font-weight:600; font-size:15px;" 
+    colspan="2" align="center">
+    Item Details
+   
+ </td>
+  </tr>
+
+  <tr>
+    <td colspan="2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;" width="34%" height="32" align="center">Description</td>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;" width="34%" height="32" align="center">Unit</td>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;" width="30%" align="center">Qty</td>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:13px; border-top:1px solid #333; border-bottom:1px solid #333; border-right:1px solid #333;" width="30%" align="center">Remark</td>
+      </tr>
+
+     
+      <tr>
+        <!-- <th scope="row">1</th> -->
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;" height="32" align="center">{{item.Description}}</td>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;" height="32" align="center">{{item.unit}}</td>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;" height="32" align="center">{{item.req_qty}}</td>
+        <td style="padding-top:10px;font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:13px; border-bottom:1px solid #333; border-left:1px solid #333; border-right:1px solid #333;" height="32" align="center">{{item.Remark}}</td>
+        
+      </tr>
+    
+    </table></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+ 
+    </table></td>
+    
+  <div class="col-lg-6">
+    <h2>Request Status:</h2>
+      <p><span>Department Head Response: {{item.dept_head_Action}} by {{dep_head}}</span></p>
+      <p><span>Store Manager Response: {{item.Store_Keeper_Action}}</span></p>
+
+      {% if item.Recival_status_by_Employer == "Received" %}
+  
+        <p><span>Received Status:</span> <span class="h5"> Received</span> </p>
+    
+    {% else %}
+        <p><span>Received Status:</span> <span class="h5"> Not Received yet</span> </p>
+    {% endif %} 
+
+  </div>
+  
+  {% if item.Type_of_item or item.Serial_No or item.Unique_Name_No  %}
+  <hr>
+  <div class="col-lg-6">
+    <h2>Item Specifications</h2>
+    {% if item.Type_of_item %}
+    
+    <p><span>Item Type:</span> <span class="h5">{{item.Type_of_item}}</span></p>
+   {% endif %}
+   {% if item.Serial_No %}
+    <p><span>Item  Serial No:</span> <span class="h5">{{item.Serial_No}}</span></p>
+   {% endif %}
+   {% if item.Unique_Name_No %}
+    <p><span>Item Unique_Name_No:</span> <span class="h5">{{item.Unique_Name_No}}</span></p>
+   {% endif %}
+  </div>
+  
+  {% endif %}
+  <hr> <div class="col-lg-6">
+    <h2>Employer information:</h2>
+    <p><span>Employee name:</span> <span class="h5">{{item.Request_by}}</span></p>
+    <p><span>Employee Department:</span> <span class="h5">{{req_em.inDepartment }}</span></p>
+     <p><span>Employee Phone:</span> <span class="h5">{{req_em.phone1}}</span></p>
+     <p><span>Employee Signature:</span></p> 
+  </div>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+ 
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr> 
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,24 @@
+{% extends 'account/account_base.html' %}
+
+{% load static %}
+
+{% block content %}
+<main>
+    <div class="container">
+
+      <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h3>We appreciate you applying online. We will email your username and password to you.</h3>
+       <h1 class="p-4 text-success">DanEnergy</h1>
+       <div class="p-4">
+        <a class="btn" href="{% url 'login' %}">Back to home</a>
+        
+       
+       </div>
+       
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+
+{% endblock %}

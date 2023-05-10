@@ -1,0 +1,127 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Vendors</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'vendors' %}">Vendors</a>
+        </li>
+        <li class="breadcrumb-item">New Vendors</li>
+      </ol>
+    </nav>
+  </div>
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h3
+                style="
+                  color: black;
+                  display: flex;
+                  justify-content: center;
+                  margin: 30px;
+                "
+              >
+                Add New Vendor
+              </h3>
+              <form action="add-new-vendor" method="post">
+                {% csrf_token %}
+                <div class="row mb-3" style="margin: 10px">
+                  <div class="col-lg-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="floatingInput"
+                        name="vendorName"
+                        required
+                        placeholder="vendor name"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-house-fill"></i> Vendor Name</span
+                        ></label
+                      >
+                    </div>
+
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="vendorProducts"
+                        id="floatingInput"
+                        placeholder="vendor products"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-award"></i> Products</span
+                        ></label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-floating m-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="vendorOrigin"
+                        id="floatingInput"
+                        placeholder="vendor origin"
+                      />
+                      <label for="floatingInput" style="color: black"
+                        ><span
+                          ><i class="bi bi-geo-alt"></i> Origin</span
+                        ></label
+                      >
+                    </div>
+
+                    <div class="form-floating m-3">
+                      <select
+                        class="form-select"
+                        name="vendorType"
+                        id="floatingSelect"
+                        aria-label="Floating label select example"
+                      >
+                        <option>Type of Vendor</option>
+                        <option value="Manufacturer">Manufacturer</option>
+                        <option value="Wholesaler">Wholesaler</option>
+                        <option value="Retailer">Retailer</option>
+                        <option value="Service & Maintenance">
+                          Service & Maintenance
+                        </option>
+                        <option value="Independent vendors">
+                          Independent vendors
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10"></div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-10"></div>
+                  <div class="col-lg-2" style="margin-top: 25px">
+                    <button type="submit" class="btn btn-outline-secondary">
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

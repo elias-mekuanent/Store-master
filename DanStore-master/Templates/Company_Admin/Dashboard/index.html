@@ -1,0 +1,138 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Dashbord</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Dashbord</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row">
+         
+
+          <!-- Revenue Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card newshadow">
+              <div class="card-body">
+                <a href="{% url 'admin-dashboard' %}">
+                <h5 class="card-title">Stores</h5>
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                    <i class="bx bx-store" style="color: black"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h5><span class="badge bg-primary">{{storeLength}}</span><h5>
+                   
+                  </div>
+                </div>
+              </a>
+              </div>
+            </div>
+          </div>
+          <!-- End Revenue Card -->
+
+          <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card customers-card newshadow">
+              <div class="card-body">
+              <a href="{% url 'deparetment-dashboard' %}">
+                <h5 class="card-title">Departments</h5>
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                  <i class="bi bi-boxes" style="color: black"></i>
+                  </div>
+                  <div class="ps-3">
+                   
+                    <h5><span class="badge bg-primary">{{deptLength}}</span><h5>
+                  </div>
+                </div>
+              </a>
+              </div>
+            </div>
+          </div>
+          <!-- End Customers Card -->
+          <!-- Customers Card -->
+          <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card customers-card newshadow">
+              <div class="card-body">
+                <a href="{% url 'employees-dashboard' %}">
+                <h5 class="card-title">Employees</h5>
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                    <i class="bi bi-people" style="color: black"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h5><span class="badge bg-primary">{{emplength}}</span><h5>
+                    
+                  
+                  </div>
+                </div>
+              </a>
+              </div>
+            </div>
+          </div>
+          <!-- End Customers Card -->
+        </div>
+      </div>
+    </div>
+    {% block Dashboard %}
+   <!-- Table -->
+   <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Stores</h5>
+          
+          <!-- Table with stripped rows -->
+          <table class="table table-border table-striped datatable">
+            <thead>
+              <tr>
+                
+                <th scope="col">Store Name</th>
+                <th scope="col">Store Manager </th>
+                <th scope="col">Start Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for store in allstores %}
+              <tr>
+                <td> <a href="{% url 'store-details' store.id %}">{{store.storeName}}</a></td>
+                <td>{{store.storeKeeper}}</td>
+                <td>{{store.storeDescription}}</td>
+              </tr>
+             {% endfor %}
+            </tbody>
+          </table>
+          <!-- End Table with stripped rows -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <!-- </div> -->
+    {% endblock Dashboard %}
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}
+
+<!-- End #main -->

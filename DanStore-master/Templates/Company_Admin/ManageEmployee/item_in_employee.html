@@ -1,0 +1,67 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Manage Employees</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'manage-employee' %}">Manage Employees</a>
+        </li>
+        <li class="breadcrumb-item">Add New Employees</li>
+      </ol>
+    </nav>
+  </div>
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">item in {{Request_by}} </h3>
+            <table class="table datatable">
+              <thead>
+                <tr>
+                  <!-- <th scope="col">#</th> -->
+                  <th scope="col">Describtion</th>
+                  <th scope="col">Unit</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in all_emp_request_in_me %}
+                <tr>
+                  <!-- <th scope="row">1</th> -->
+                  <td>{{item.Description}}</td>
+                  <td>{{item.unit}}</td>
+                  <td>{{item.req_qty}}</td>
+                  <td>{{item.date}}</td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+         
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

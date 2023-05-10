@@ -1,0 +1,47 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Store</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Store</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+     
+      <!--  -->
+      {% for eachStore in stores %}
+      <div class="col-lg-6">
+        <a href="{% url 'store-details' eachStore.id %}">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{eachStore.storeName}}</h5>
+              <p class="card-text">{{eachStore.storeDescription}}</p>
+            </div>
+            <iframe
+              src="{{eachStore.storeLocation}}"
+              width="570"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      <!--  -->
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

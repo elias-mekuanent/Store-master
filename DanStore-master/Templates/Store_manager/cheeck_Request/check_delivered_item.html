@@ -1,0 +1,90 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Cheeck-Request</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Cheeck-Request</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-2"></div>
+          <div class="col-lg-8">
+           
+            <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Item Details</h5>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th scope="col">Describtion</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <td>{{item.Description}}</td>
+                        <td>{{item.unit}}</td>
+                        <td>{{item.req_qty}}</td>
+                        <td>{{item.date}}</td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  <br>
+                 
+                  <h5><strong>Request Status:</strong></h5>
+                  <ul>
+                    <li><p><span>Department Head Response:</span> <span class="h5">{{item.dept_head_Action}} by {{dep_head}}</span></p></li>
+                    <li><p><p><span>Store Manager Response:</span> <span class="h5">{{item.Store_Keeper_Action}}</span></p></p></li>
+                    {% if item.Recival_status_by_Employer == "Received" %}
+                  
+                    <li><p><span>Received Status:</span> <span class="h5"> Received</span> </p></li>
+                    
+                    {% else %}
+                    <li><p><span>Received Status:</span> <span class="h5"> Not Received yet</span> </p></li>
+                    {% endif %} 
+                  </ul>
+                  <hr>
+                  {% if item.Type_of_item or item.Serial_No or item.Unique_Name_No  %}
+                  <h5 class=" pt-2"><strong>Item Specifications</strong></h5>
+                  <ul>
+                    {% if item.Type_of_item %}
+                    <li><p><span>Item Type:</span> <span class="h5">{{item.Type_of_item}}</span></p></li>
+                    {% endif %}
+                    {% if item.Serial_No %}
+                    <li><p><p><span>Item  Serial No:</span> <span class="h5">{{item.Serial_No}}</span></p></p></li>
+                    {% endif %}
+                    {% if item.Unique_Name_No %}
+                    <li><p><p><span>Item Unique_Name_No:</span> <span class="h5">{{item.Unique_Name_No}}</span></p></p></li>
+                    {% endif %}
+                  </ul>
+                  <hr>
+                  {% endif %}
+                  <h5><strong>Employer information:</strong></h5>
+                  <ul>
+                    <li><p><span>Employer name:</span> <span class="h5">{{item.Request_by}}</span></p></li>
+                    <li><p><p><span>Employer Department:</span> <span class="h5">{{req_em.inDepartment }}</span></p></p></li>
+                    <li><p><p><span>Employer Phone:</span> <span class="h5">{{req_em.phone1}}</span></p></p></li>
+                  </ul>
+                 
+                </div>
+              </div>
+              <div class="text-end">
+                <a href="{% url 'dilverd_item' item.id %}" type="button" class="btn btn-secondary"><i class="bi bi-printer"></i> Print</a>
+              </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

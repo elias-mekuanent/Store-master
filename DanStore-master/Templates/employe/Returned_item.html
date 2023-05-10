@@ -1,0 +1,37 @@
+{% extends 'employe/index.html' %} {% load static %}
+{% block table %} 
+              <div class="col-lg-12">
+                <div class="card recent-sales overflow-auto">
+                  <div class="card-body">
+                    <h5 class="card-title">Returned Items</h5>
+                    
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                      <thead>
+                        <tr>
+                          <!-- <th scope="col">#</th> -->
+                          <th scope="col">Describtion</th>
+                          <th scope="col">Unit</th>
+                          <th scope="col">Qty</th>
+                          <th scope="col">Received Status</th>
+                          <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for item in all_emp_request_retun %}
+                        <tr>
+                          <td>{{item.Description}}</td>
+                          <td>{{item.unit}}</td>
+                          <td>{{item.req_qty}}</td>
+                          <td><span class="badge bg-success">{{item.Recival_status_by_Employer}}</span></td>
+                          <td>{{item.date}}</td>
+                        </tr>
+                       {% endfor %}
+                      </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+      
+                  </div>
+                </div>
+                </div>
+                {% endblock table %}

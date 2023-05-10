@@ -1,0 +1,68 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Role</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Role</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div
+        class="col-lg-12"
+        style="margin: 20px; display: flex; justify-content: right"
+      >
+        <!-- <a
+          href="{% url 'add-new-role' %}"
+          type="button"
+          class="btn btn-outline-secondary btn-lg"
+          style="margin-right: 40px"
+        >
+          <i class="bi bi-file-earmark-plus"></i>
+          <span style="margin: 0 7px"></span>Add New Roles
+        </a> -->
+      </div>
+    </div>
+    <div class="row">
+      <!--  -->
+      {% for eachRole in allRoles %}
+      <div class="col-xxl-4 col-md-6 col-sm-6">
+        <a href="{% url 'role-details' eachRole.pk %}">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title" style="color: black">
+                {{eachRole.roleName}}
+              </h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-person-lines-fill"></i>
+                </div>
+                <div class="ps-3">
+                  <span class="text-success small pt-1 fw-bold"
+                    >{{eachRole.roleMembers}}</span
+                  >
+                  <span class="text-muted small pt-2 ps-1"> admins</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      <!--  -->
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

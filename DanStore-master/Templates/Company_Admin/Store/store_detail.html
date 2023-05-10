@@ -1,0 +1,64 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Store</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item"><a href="{% url 'store' %}">Store</a></li>
+        <li class="breadcrumb-item">Store Details</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <!--  -->
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Categories and Items that are stored at {{store.storeName}} are
+              listed below.</h5>
+
+            <!-- List group with Links and buttons -->
+            <div class="list-group">
+              {% for category in all_category %}
+              <a href="{% url 'cat-item-detail' category.id  %}" class="list-group-item list-group-item-action" aria-current="true">
+                {{ category.Catagory_Name }}
+              </a>
+               {% endfor %}
+             </div><!-- End List group with Links and buttons -->
+
+          </div>
+        </div>
+
+      </div>
+     <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Manage Store</h3>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="p-2">
+              <input type="text" value="{{store.storeName}}" name="store_name" class="form-control" id="">
+            </div>
+            <div class="p-2">
+              <button type="submit" class="btn btn-outline-warning">Update</button>
+              <a href="{% url 'delete-store' store.id %}" class="btn btn-outline-danger">Delete</a>
+            </div>
+           
+          </form>
+        </div>
+      </div>
+     </div>
+      
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

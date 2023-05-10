@@ -1,0 +1,105 @@
+{% extends 'Store_manager/S_base.html' %} {% block store %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'store-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <section class="section dashboard">
+    <div class="row">
+     
+     <div class="col-12">
+        <div class="card p-3">
+        <div class="cadr-body">
+          <div class="row ">
+            
+            <div class="col-5">
+              <a href="{% url 'store-dashboard' %}" ><span class="card-title">All Item In Store</span></a>
+            </div>
+            <div class="col-7">
+              
+
+             
+              <form action="{% url 'search-catagory' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
+                <div class="col-10">
+                  <input type="text" name="query" placeholder="Search by Catagory Name or Item Name" class="form-control">
+                </div>
+                <div class="col-2">
+                  <button type="submit" class="btn btn-primary"><i class="bi bi-search" class="form-control"></i>Search</button>
+                </div>
+              </div>
+              </form>
+           
+            </div>
+            </div><!-- End Search Bar -->
+        
+          </div>
+        
+        <hr>
+        {% block forsearch %}
+        <div class="row">
+          
+          {% for catagory in all_catagory %}
+          <div class="col-4 p-2" >
+            <div class="card info-card sales-card newshadow">
+              <a href="{% url 'catagory-detail' catagory.id %}">
+                <div class="card-body">
+                  <h5 class="card-title" style="color: black">
+                    {{catagory.Catagory_Name}}
+                  </h5>
+                  <div class="d-flex align-items-center">
+                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                            <i class="bi bi-cart"></i>
+                          </div> -->
+                    <div class="ps-3">
+                      <span style="color: black">
+                        <h2><span class="badge bg-info"> {{catagory.item_set.all.count}} </span><span class="h5"> Item in Stok</span> </h2>
+                      </span>
+                      
+                      
+                      <span class="text-primary">
+                        {{catagory.Type_of_Asset}} 
+                      </span>
+                      
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          {% endfor %}
+          
+        </div>
+        {% endblock forsearch %}
+        </div>
+    </div>
+          </div>
+
+    </div>
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

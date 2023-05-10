@@ -1,0 +1,60 @@
+{% extends 'Company_Admin/base.html' %} {% block admin %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Store</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item"><a href="{% url 'store' %}">Store</a></li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'store-details' category.store.id %}"
+            >Store details</a
+          >
+        </li>
+        <li class="breadcrumb-item">Items in Categories</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <h3 style="color: black; display: flex; justify-content: center"></h3>
+      <!-- Tabels -->
+      <div class="col-lg-11" style="margin: 30px">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title" style="color: black">
+              Items that are in {{category.Catagory_Name}} Category are
+            </h5>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <!-- <th scope="col">#</th> -->
+                  <th scope="col">Item Name</th>
+                  <th scope="col">Total in Stock</th>
+                  <th scope="col">Last Updated at</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in category.item_set.all %}
+                <tr>
+                  <!-- <th scope="row">1</th> -->
+                  <td>{{item.item_name}}</td>
+                  <td>{{item.total_item_in_Stok}}</td>
+                  <td>{{item.last_update}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- End of Tabel -->
+    </div>
+  </section>
+</main>
+{% endblock %}

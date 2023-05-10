@@ -1,0 +1,55 @@
+{% extends 'account/form1.html' %}
+{% load static %}
+{% block form %}
+<p class="text-center small">What is Your Postion @DanEnrengy</p>
+<form class="row g-3 needs-validation" method="POST" action="">
+  {% csrf_token %}
+ 
+    <div class="row m-3">
+        <label class="col-lg-2 col-form-label">Branch</label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" name="dep">
+            <option disabled>Select Branch </option>
+            {% for store in all_store %}
+            
+            <option value="{{store.storeName}}">{{store.storeName}}</option>
+            
+           {% endfor %}
+            
+          </select>
+        </div>
+      </div>    
+    <div class="row m-3">
+        <label class="col-lg-2 col-form-label">Your Department</label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example " name="Depet">
+            <option disabled>Select Department</option>
+            {% for dep in all_dep %}
+            
+            <option value="{{dep.departmentName}}">{{dep.departmentName}}</option>
+            
+           {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="row m-3">
+        <label class="col-lg-2 col-form-label">Your Role</label>
+        <div class="col-sm-10">
+          <select class="form-select" aria-label="Default select example" name="role">
+            <option selected>Select Role</option>
+            <option value="Employe">Employe</option>
+            <option value="Dept_Head">Department Head</option>
+            <option value="Store_Manager">Store Manager</option>
+            <option value="Finance">Finance</option>
+            <option value="Human_Resource">Human Resource</option>
+          </select>
+        </div>
+      </div>
+     
+    <div class="col-12 text-end">
+      <button class="btn btn-primary " type="submit">Submit</button>
+    </div>
+    
+  
+  </form>
+{% endblock %}

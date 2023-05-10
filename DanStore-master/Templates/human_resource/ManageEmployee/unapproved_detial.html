@@ -1,0 +1,154 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Employe Detail</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Employe</li>
+          <li class="breadcrumb-item active">Employe-Detail</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              {% if un_employ.profile_pic %}
+              <img src="{{un_employ.profile_pic.url}}" alt="Profile" >
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Personal Details</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Educational Background </button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Position @DanEnergy</button>
+                </li>
+
+                
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  
+                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-9 col-md-8"> {{un_employ.First_Name}} {{un_employ.Last_Name}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Emila</div>
+                    <div class="col-lg-9 col-md-8">{{un_employ.Emila}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Address</div>
+                    <div class="col-lg-9 col-md-8">{{un_employ.Address}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Phone1</div>
+                    <div class="col-lg-9 col-md-8">{{un_employ.phone1}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Phone1</div>
+                    <div class="col-lg-9 col-md-8">{{un_employ.phone1}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                    <div class="col-lg-9 col-md-8">{{un_employ.gender}}</div>
+                  </div>
+
+                
+
+                </div>
+
+                <div class="tab-pane fade profile-overview pt-3" id="profile-edit">
+
+                  <!-- Profile Edit Form -->
+        
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Filed Study</div>
+                        <div class="col-lg-9 col-md-8"> {{un_employ.Titel}} in {{un_employ.Filed_Study}}</div>
+                      </div>
+    
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Collage</div>
+                        <div class="col-lg-9 col-md-8">{{un_employ.Collage}}</div>
+                      </div>
+    
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Grade</div>
+                        <div class="col-lg-9 col-md-8">{{un_employ.grade}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Year of Graguation</div>
+                        <div class="col-lg-9 col-md-8">{{un_employ.Year_Graguation}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Document</div>
+                        <div class="col-lg-9 col-md-8">  <a href="{{un_employ.Document.url}}" class="text-dark">Dawnload file</a></div>
+                      </div>
+    
+                      
+    
+  
+
+                </div>
+
+                <div class="tab-pane fade profile-overview pt-3" id="profile-settings">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Branch</div>
+                        <div class="col-lg-9 col-md-8">{{un_employ.Branch}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Department @Dan</div>
+                        <div class="col-lg-9 col-md-8">{{un_employ.Department}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label">Role @Dan</div>
+                        <div class="col-lg-9 col-md-8">{{un_employ.role}}</div>
+                      </div>
+                 
+                </div>
+
+              
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1 style="color: black">Manage Employees</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'admin-dashboard' %}">Home</a>
+        </li>
+        <li class="breadcrumb-item">Manage Employees</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  {% for mssg in messages%}
+  {% if mssg.tags == 'success' %}
+  <div class="alert alert-success" role="alert">
+    {{mssg}}
+  </div>
+  {%else %}
+  <div class="alert alert-danger" role="alert">
+    {{mssg}}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <section class="section">
+    
+    <!-- Tabels -->
+    <div class="col-lg-11 pt-5">
+      
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Unapproved Employees</h5>
+          <table class="table table-border table-striped datatable">
+            <thead>
+              <tr>
+               
+                <th scope="col">Full Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Email</th>
+                <th scope="col">Access Store</th>
+                <th scope="col">Human Resource Action</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              {% for emp in allUnAprove %}
+              <tr>
+                <td>Efrem</td>
+                <td>Employe</td>
+                <td>Eamil</td>
+                <td>Gender</td>
+                <td>09393816415</td>
+                <td>Department</td>
+                <td>
+                  <span class="badge bg-danger">This apilection not Accepted</span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- End of Tabel -->
+  </section>
+</main>
+<!-- End #main -->
+
+{% endblock %}

@@ -1,0 +1,358 @@
+{% extends 'human_resource/HR_base.html' %}
+{% block hr %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Employe Detail</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Employe</li>
+          <li class="breadcrumb-item active">Employe-Detail</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              {% if req_emp.profile_pic %}
+              <img src="{{req_emp.profile_pic.url}}" alt="Profile" >
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Employe Profile</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Manage Employer Role</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Add to Department</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Active State</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.Full_Name}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.user.email}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Gender</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.gender}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Phone1</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.phone1}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Phone2</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.phone2}}</div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Address</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.address}}</div>
+                  </div>
+                 {% if req_emp.inDepartment %}
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Department</div>
+                    <div class="col-lg-9 col-md-8">{{req_emp.inDepartment}}</div>
+                  </div>
+                  {% endif %}
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                  <!-- Profile Edit Form -->
+                  <form action="{% url 'manage_emp_role' req_emp.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Select Role</label>
+                        <div class="col-md-8 col-lg-9">
+                          {% if req_emp.role == 'Employe' %}
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r1" checked onclick=return ValidatePetSelection();>
+                            <label class="form-check-label" for="changesMade">
+                              Employer
+                            </label>
+                          </div>
+                          
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r2" onclick=return ValidatePetSelection();>
+                            <label class="form-check-label" for="changesMade">
+                              Department Head
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r3" onclick=return ValidatePetSelection();>
+                            <label class="form-check-label" for="changesMade">
+                              Store Manager
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r4" onclick=return ValidatePetSelection();>
+                            <label class="form-check-label" for="changesMade">
+                              Finance Officer
+                            </label>
+                          </div>
+                          <!-- <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="R1" >
+                            <label class="form-check-label" for="gridRadios1">
+                              Employer
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="R2">
+                            <label class="form-check-label" for="gridRadios1">
+                              Department Head
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="R3" >
+                            <label class="form-check-label" for="gridRadios1">
+                              Store Manager
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="R4" >
+                            <label class="form-check-label" for="gridRadios1">
+                              Finance Officer
+                            </label>
+                          </div> -->
+                          {% elif req_emp.role == 'Dept_Head' %}
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r2" checked onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                                Department Head
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r1" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Employer
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r3" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Store Manager
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r4" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Finance Officer
+                            </label>
+                          </div>
+                          {% elif req_emp.role == 'Store_Manager' %}
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r3" checked onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="newProducts">
+                                Store Manager
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r2" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="newProducts">
+                                Department Head
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r1" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Employer
+                            </label>
+                          </div> 
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r4" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Finance Officer
+                            </label>
+                          </div>
+                          {% elif req_emp.role == 'Finance' %}
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r4" checked onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="newProducts">
+                                Finance Officer
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r2" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="newProducts">
+                                Department Head
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r1" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Employer
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r3" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Store Manager
+                            </label>
+                          </div>   
+                          
+                          {% elif req_emp.role == 'Human_Resource' %}
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r4" checked onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="newProducts">
+                                Finance Officer
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r2" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="newProducts">
+                                Department Head
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r1" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Employer
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="changesMade" name="r3" onclick="return ValidatePetSelection();">
+                            <label class="form-check-label" for="changesMade">
+                              Store Manager
+                            </label>
+                          </div>   
+                          
+                          
+                          {% endif %}                   
+                        </div>
+                      </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-success">Save Changes</button>
+                    </div>
+                  </form><!-- End Profile Edit Form -->
+
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-settings">
+
+                  <!-- Settings Form -->
+                  <form action="{% url 'hr_set_dept_emp' req_emp.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Select Department</label>
+                        <div class="col-md-8 col-lg-9">
+                          <select class="form-control" id="currentPassword" name="dept_name">
+                            <option value="" disabled>Current Department is: {{req_emp.inDepartment}}</option>
+                            {% for dep in all_dep %}
+                               <option value="{{dep.departmentName}}">{{dep.departmentName}}</option>
+                            {% endfor %}
+                          </select>
+                           </div>
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                      </div>
+                    
+                  </form><!-- End settings Form -->
+
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <!-- Change Password Form -->
+                  <form action="{% url 'hr_active_status' req_emp.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Active Status</label>
+                        <div class="col-md-8 col-lg-9">
+                          {% if req_emp.user.is_active %}
+                          <div class="form-check form-switch">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">OFF</label>
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="active" checked>
+                            
+                          </div>
+                          {% else %}
+                          <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="active">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">ON</label>
+                          </div>
+                          {% endif %}
+                          
+                        </div>
+                      </div>
+  
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-success">Save Changes</button>
+                      </div>
+                  </form><!-- End Change Password Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <script type="text/javascript">  
+      function ValidatePetSelection()  
+      {  
+          var checkboxes = document.getElementById("changesMade");  
+          var numberOfCheckedItems = 0;  
+          for(var i = 0; i < checkboxes.length; i++)  
+          {  
+              if(checkboxes[i].checked)  
+                  numberOfCheckedItems++;  
+          }  
+          if(numberOfCheckedItems > 1)  
+          {  
+              alert("You can't select more than one Role!");  
+              return false;  
+          }  
+      }  
+      </script>
+  </main><!-- End #main -->
+
+{% endblock %}

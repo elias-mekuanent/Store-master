@@ -1,0 +1,92 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Cheeck-Request</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Cheeck-Request</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+           
+            <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Request Table</h5>
+                  <!-- Table with stripped rows -->
+                  <table class="table datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Request tool</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Check by </th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Recival Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for request in emp_request %}
+                      {% if request.Store_Keeper_Action == "Allowed" %}
+                      <tr>
+                        <td>{{request.date}}</td>
+                        <td>{{request.Request_by}}</td>
+                        {% if request.Recival_status_by_Employer == 'Received' %}
+                        <td><a href="{% url 'check_delivered_item' request.id  %}" >{{request.Description}}</a></td>
+                        
+                        {% elif request.Recival_status_by_Employer == 'Not_Received' %}
+                        <td>{{request.Description}}</td>
+                        {% else %}
+                        <td><a href="{% url 'Item_Delivery_form' request.id  %}" >{{request.Description}}</a></td>
+                        {% endif %}
+                        <td>{{request.req_qty}}</td>
+                        <td>{{request.checkd_by.Full_Name}}</td>
+                        <td><span class="badge bg-success">Approved</span></td>
+                        {% if request.Store_Keeper_Action == "Pending" %}
+                        <td>
+                          <a class="btn btn-sm btn-success text-dark disabled">Yes</a>
+                          <a class="btn btn-sm btn-danger text-dark disabled">No</a>
+                        </td>
+                        {% elif request.Store_Keeper_Action == 'wait' %}
+                        <td>
+                          <a class="btn btn-sm btn-success text-dark disabled">Yes</a>
+                          <a class="btn btn-sm btn-danger text-dark disabled">No</a>
+                        </td>
+                        {% elif request.Store_Keeper_Action == 'Allowed' %} 
+                           {% if request.Recival_status_by_Employer == 'Received' %}
+                           <td><span class="badge bg-success">Completed_Request</span></td>
+                        {% elif request.Recival_status_by_Employer == 'Not_Received' %}
+                        <td><span class="badge bg-danger">Request_Cancelled</span></td>
+                        {% else  %}
+                        <td><span class="badge bg-warning">Pending_Request.....</span></td>
+                          {% endif %}
+                       
+                       
+                        {% endif %}
+                        
+                         </tr>
+                      {% endif %}
+                      {% endfor %}
+                     
+                       
+                      
+                    </tbody>
+                  </table>
+                  <!-- End Table with stripped rows -->
+    
+                </div>
+              </div>
+
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

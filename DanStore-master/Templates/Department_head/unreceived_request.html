@@ -1,0 +1,64 @@
+{% extends 'Department_head/D_base.html' %}
+{% block d_head  %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Pending-Request</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'dept-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Pending-Request</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+           
+            <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Pending-Request</h5>
+                  <!-- Table with stripped rows -->
+                  <table class="table datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Request tool</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Approved By:</th>
+                        <th scope="col">Store Manager Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for unrec in all_unreseved_req %}
+                      {% if unrec.Store_Keeper_Action != "Allowed" %}
+                      <tr>
+                        <td>{{unrec.date}}</td>  
+                        <td>{{unrec.Request_by}}</td>
+                        <td>{{unrec.Description}}</td>
+                        <td>{{unrec.req_qty}}</td> 
+                        <td>{{unrec.checkd_by.Full_Name}}</td>
+                        
+                        {% if unrec.Store_Keeper_Action == "Pending" %}
+                        <td><span class="badge bg-warning text-dark">{{unrec.Store_Keeper_Action}} ..............</span></td>
+                        {% elif unrec.Store_Keeper_Action == 'wait' %}
+                        <td><span class="badge bg-info">{{unrec.Store_Keeper_Action}}</span></td>
+                        {% elif unrec.Store_Keeper_Action == 'Reject' %}
+                        <td><span class="badge bg-danger">{{unrec.Store_Keeper_Action}}</span></td>
+                        {% endif %} 
+                      </tr>
+                      {% endif %} 
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <!-- End Table with stripped rows -->
+    
+                </div>
+              </div>
+
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}

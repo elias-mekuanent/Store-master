@@ -1,0 +1,83 @@
+{% extends 'Store_manager/S_base.html'  %}
+
+{% block store %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Manage Catagory</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Manage Shelf</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">All shelf List</h5>
+                  <!-- List group with Links and buttons -->
+                  <div class="list-group">
+                    {% for catagory in all_catagory %}
+                    <a href="{% url 'catagory-detail' catagory.id %}" class="list-group-item list-group-item-action" aria-current="true">
+                      {{catagory.Catagory_Name}}
+                    </a>
+                    {% endfor %}
+                  </div><!-- End List group with Links and buttons -->
+                </div>
+              </div>
+         </div>
+         <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Add New Shelf</h5>
+    
+                  <!-- Vertical Form -->
+                  <form class="row g-3" method="POST">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <label for="inputNanme4" class="form-label">Shelf Name</label>
+                      <input type="text" class="form-control"  name="catagory" placeholder="Enter Shelf" required>
+                      </div>
+                        <div class="col-md-12">
+                          <div class=" mb-3">
+                            <label for="floatingSelect" class="pb-2">Type of Asset</label>
+                            <select class="form-select" id="floatingSelect" aria-label="State" name="typeasset" required>
+                              <option value="Fixed assets">Fixed assets</option>
+                              <option value="Current assets">Current assets</option>
+                            </select>
+                            
+                          </div>
+                        </div>
+                    <div class="text-center d-grid">
+                      <button type="submit" class="btn btn-success">Add</button>
+                    </div>
+                  </form><!-- Vertical Form -->
+    
+                </div>
+              </div>
+        </div>
+    </section>
+
+
+
+    
+
+  </main><!-- End #main -->
+
+
+{% endblock %}

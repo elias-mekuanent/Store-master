@@ -1,0 +1,78 @@
+{% extends 'Department_head/D_base.html' %}
+{% block d_head  %}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1 style="color: black">Chat</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'store-dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Chat</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+    {% for mssg in messages%}
+    {% if mssg.tags == 'success' %}
+    <div class="alert alert-success" role="alert">
+      {{mssg}}
+    </div>
+    {%else %}
+    <div class="alert alert-danger" role="alert">
+      {{mssg}}
+    </div>
+    {% endif %}
+    {% endfor %}
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                      <form action="" method="post">
+                        <div class="row">
+                         
+                            {% csrf_token %}
+                            <div class="col-10">
+                              <input type="text" class="form-control" id="inputText" name="serach" placeholder="Serach by username" >
+                          </div>
+                          <div class="col-2">
+                              <button type="submit" class="btn btn-success"> <i class="bi bi-search"></i> Search</button>
+                          </div>
+                          
+                        </div>
+                      </form>
+                    </div>
+                    <div class="card-body pt-2">
+                        <div class="list-group">
+                           
+                          {% block chat %}
+
+                          {% if chat_group1 %}
+                          <a href="{% url 'dept_chat_pepol' chat_group1.id %}" class="list-group-item list-group-item-action " aria-current="true">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                  
+                                  {% if chat_group1.profile_pic %}
+                                    <img src="{{ chat_group1.profile_pic.url}}" alt="Profile" class="rounded-circle w-25">
+                                  {% endif %}
+                      
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="pt-3">
+                                        <span class="d-none d-md-block ps-2">{{chat_group1.user.first_name}} {{chat_group1.user.last_name}}</span>
+                                     </div>
+                                   
+                                </div>
+                            </div>
+                            </a>
+                         {% endif %}
+                            {% endblock chat %}
+                          </div><!-- End List group Advanced Content -->
+                    </div>  
+                    <div class="card-footer">   
+                    </div>
+                  </div><!-- End Card with header and footer -->
+            </div>
+         </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock %}
